@@ -2,13 +2,27 @@ html {
 
 }
 
+
+li {
+    
+}
+
+.entrylist {
+    list-style-type: none;
+    padding: 0;
+}
+
 .journal {
     background-color: lightgray;
+    border: 1px solid gray;
 }
 
 .entryitem {
-    margin-top: 1.5em;
     margin-bottom: 1.5em;
-    border-style: double;
-    border-color: black;
+    width: fit-content;
+    width: 284px;
+    padding: 10px 10px 20px 10px;
+    border: 1px solid #BFBFBF;
+    background-color: white;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
