@@ -9,14 +9,22 @@
   <body>
 
     <div class="add-entry">
-      <form class="" action="/action_page.php" method="post">
-        <label for="date">Datum</label><br>
-        <input type="date" id="date"><br>
-        <label for="name">Dein Name</label><br>
-        <input type="text" id="name"><br>
-        <label for="entry">Dein Eintrag</label><br>
+      <form class="" action="http//www.foo.com" method="post">
+        <div>
+          <label for="date">Datum</label><br>
+          <input type="date" id="date"><br>
+        </div>
+        <div>
+          <label for="name">Dein Name</label><br>
+          <input type="text" id="name"><br>
+        </div>
+        <div>
+          <label for="entry">Dein Eintrag</label><br>
         <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
-        <input type="submit">
+        </div>
+        <div>
+          <input type="submit">
+        </div>
       </form>
     </div>
 
@@ -26,18 +34,23 @@
     <div class="journal">
       <ul class="entrylist">
         <li id="1" class="entryitem center">
-          <p>#Name am #Datum</p>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
+          <div>
+            <p>#Name am #Datum</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
             sed diam nonumy eirmod tempor invidunt ut labore et dolore 
             magna aliquyam erat, sed diam voluptua. At vero eos et 
             accusam et</p>
+          </div>
+          
         </li>
         <li id="2" class="entryitem center">
-          <p>#Name am #Datum</p>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+          <div>
+            <p>#Name am #Datum</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
             sed diam nonumy eirmod tempor invidunt ut labore et dolore
             magna aliquyam erat, sed diam voluptua. At vero eos et
             accusam et</p>
+          </div>
         </li>
       </ul>
     </div>
