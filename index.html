@@ -9,21 +9,21 @@
   <body>
 
     <div class="add-entry">
-      <form class="" action="http//www.foo.com" method="post">
+      <form action="http//www.foo.com" method="post">
         <div>
           <label for="date">Datum</label><br>
-          <input type="date" id="date"><br>
+          <input type="date" id="date" name="date"><br>
         </div>
         <div>
           <label for="name">Dein Name</label><br>
-          <input type="text" id="name"><br>
+          <input type="text" id="name" name="name"><br>
         </div>
         <div>
           <label for="entry">Dein Eintrag</label><br>
-        <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
+          <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
         </div>
         <div>
-          <input type="submit">
+          <button>Submit</button>
         </div>
       </form>
     </div>
