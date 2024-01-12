@@ -9,27 +9,30 @@
   <body>
 
     <div class="add-entry">
-      <form method="post"action="php-example.php">
-        <div>
-          <label for="date">Datum</label><br>
-          <input type="date" id="date" name="date"><br>
+      <div class="formcontainer">
+        <div class="content">
+          <h1>Dein Eintrag</h1>
+          <form method="post"action="php-example.php">
+            <div>
+              <label for="date">Datum</label><br>
+              <input type="date" id="date" name="date">
+            </div>
+            <div>
+              <label for="name">Dein Name</label><br>
+              <input type="text" id="name" name="name">
+            </div>
+            <div>
+              <label for="entry">Dein Eintrag</label><br>
+              <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
+            </div>
+            <div>
+              <button>Submit</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label for="name">Dein Name</label><br>
-          <input type="text" id="name" name="name"><br>
-        </div>
-        <div>
-          <label for="entry">Dein Eintrag</label><br>
-          <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
-        </div>
-        <div>
-          <button>Submit</button>
-        </div>
-      </form>
+        
+      </div>
     </div>
-
-   
-    <hr>
 
     <div class="journal">
       <ul class="entrylist">
