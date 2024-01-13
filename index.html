@@ -13,17 +13,19 @@
         <div class="content">
           <h1>Dein Eintrag</h1>
           <form method="post"action="php-example.php">
-            <div>
-              <label for="date">Datum</label><br>
-              <input type="date" id="date" name="date">
+            <div class="formrow">
+              <div class="name">
+                <label for="date">Datum</label><br>
+                <input type="date" id="date" name="date">
+              </div>
+              <div class="date">
+                <label for="name">Dein Name</label><br>
+                <input type="text" id="name" name="name">
+              </div>
             </div>
-            <div>
-              <label for="name">Dein Name</label><br>
-              <input type="text" id="name" name="name">
-            </div>
-            <div>
+            <div class="underline">
               <label for="entry">Dein Eintrag</label><br>
-              <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
+              <textarea name="entry" id="entry" rows="10"></textarea><br>
             </div>
             <div>
               <button>Submit</button>
