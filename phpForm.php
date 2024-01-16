@@ -1,11 +1,26 @@
 <?php
 
+$nameErr = $dateErr = $entryErr = "";
 $name = $date = $entry = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $name = test_input($_POST["name"]);
-  $date = test_input($_POST["date"]);
-  $entry = test_input($_POST["entry"]);
+  if (empty($_POST["name"])) {
+    $nameErr = "Name ist erforderlich";
+  } else {
+    $name = test_input($_POST["name"]);
+  }
+
+  if (empty($_POST["date"])) {
+    $dateErr = "Datum ist erforderlich";
+  } else {
+    $date = test_input($_POST["date"]);
+  }
+
+  if (empty($_POST["entry"])) {
+    $entryErr = "Eintrag ist erforderlich";
+  } else {
+    $entry = test_input($_POST["entry"]);
+  }
 }
 
 function test_input($data) {
