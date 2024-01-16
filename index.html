@@ -3,33 +3,52 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Dressler's Convectores</title>
   </head>
   <body>
 
     <div class="add-entry">
-      <form method="post"action="php-example.php">
-        <div>
-          <label for="date">Datum</label><br>
-          <input type="date" id="date" name="date"><br>
-        </div>
-        <div>
-          <label for="name">Dein Name</label><br>
-          <input type="text" id="name" name="name"><br>
-        </div>
-        <div>
-          <label for="entry">Dein Eintrag</label><br>
-          <textarea name="entry" id="entry" cols="30" rows="10"></textarea><br>
-        </div>
-        <div>
-          <button>Submit</button>
-        </div>
-      </form>
-    </div>
+      <div class="formcontainer">
+        <div class="content">
+          <h1>Dein Eintrag</h1>
+          <form method="post"action="php-example.php">
+            <div class="formrow">
+              <div class="date">
+                <label for="date">Datum:</label><br>
+                <input type="date" id="date" name="date">
+              </div>
+              <div class="name">
+                <label for="name">Dein Name:</label><br>
+                <input type="text" id="name" name="name">
+              </div>
+            </div>
+            <div class="formrow">
+              <div class="mood">
+                <label for="mood">Mood:</label> <br>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="amazing">&#128513;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="happy">&#128578;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="neutral">&#128528;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="sad">&#128577;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="angry">&#128545;</button>
+                </div>
+              </div>
 
-   
-    <hr>
+            </div>
+            <div class="underline">
+              <label for="entry">Dein Eintrag</label><br>
+              <textarea name="entry" id="entry" rows="10"></textarea><br>
+            </div>
+            <div>
+              <button type="button" class="btn btn-outline-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
 
     <div class="journal">
       <ul class="entrylist">
