@@ -5,9 +5,9 @@ body {
 
 h1 {
     text-align: center;
-    background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
+    /* background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
 }
 
 .add-entry {
@@ -17,7 +17,7 @@ h1 {
 }
 
 .formcontainer {
-    width: 600px;
+    width: 500px;
     border-radius: 10px;
     border: 1px solid grey;
     margin-top: 30px;
@@ -36,24 +36,27 @@ h1 {
 
 textarea{
     width: 100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
-    /* https://www.quora.com/Why-does-the-textarea-exceed-100-in-width-when-I-set-that-in-CSS#:~:text=To%20ensure%20that%20the%20textarea,in%20the%20element's%20total%20width. */
-}
-
-.name {
-    width: 100%;
-    position: relative;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
 }
 
 .date {
-
+    width: 50%;
 }
 
+.name {
+    width: 50%;
+}
 
-
+input {
+    border: none;
+    border-bottom:2px solid #9f01ea;
+    background-color: #f8f8f8;
+    width: 95%;
+}
 
 .entrylist {
     list-style-type: none;
