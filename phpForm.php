@@ -48,6 +48,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mood = "angry";
   }
 
+  if (empty($nameErr) && empty($dateErr) && empty($entryErr) && empty($moodErr)) {
+    // Use prepared statement to insert data into the database
+    $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $date, $mood, $entry);
+  }
+
+  // Execute the statement
+  if ($stmt->execute()) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $stmt->error;
+  }
+
+  // Close the statement
+  $stmt->close();
 }
 
 function test_input($data) {
@@ -68,12 +83,12 @@ echo $moodErr;
 echo "<br>";
 echo $entry;
 
-$sql = "INSERT INTO Entries VALUES ('$name', '$date', '$mood', '$entry')";
+/* $sql = "INSERT INTO Entries VALUES ('$name', '$date', '$mood', '$entry')";
 if (mysqli_query($conn, $sql)) {
      echo "New record created successfully";
 } else {
      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+} */
 
 mysqli_close($conn);
 ?>
