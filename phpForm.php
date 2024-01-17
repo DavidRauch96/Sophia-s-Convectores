@@ -1,5 +1,17 @@
 <?php
 
+$servername = "localhost";
+$database = "u768772283_Entry_Database";
+$username = "u768772283_David_Rauch";
+$password = "Semmel+1996";
+// Create a connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+// Check the connection
+if (!$conn) {
+     die("Connection failed: " . mysqli_connect_error());
+}
+echo "Connected successfully";
+
 $nameErr = $dateErr = $entryErr = "";
 $name = $date = $entry = "";
 
@@ -30,10 +42,19 @@ function test_input($data) {
   return $data;
 }
 
-echo "<h2>Your Input</h2>";
+$sql = "INSERT INTO Entries VALUES ('$name', '$date', '$entry')";
+if (mysqli_query($conn, $sql)) {
+     echo "New record created successfully";
+} else {
+     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
+mysqli_close($conn);
+
+/*echo "<h2>Your Input</h2>";
 echo $name;
 echo "<br>";
 echo $date;
 echo "<br>";
-echo $entry;
+echo $entry; */
 ?>
