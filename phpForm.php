@@ -12,8 +12,8 @@ if (!$conn) {
 }
 echo "Connected successfully";
 
-$nameErr = $dateErr = $entryErr = "";
-$name = $date = $entry = "";
+$nameErr = $dateErr = $moodErr = $entryErr = "";
+$name = $date = $mood = $entry = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["name"])) {
@@ -33,6 +33,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $entry = test_input($_POST["entry"]);
   }
+
+  if (empty($_POST["selectedMood"])) {
+    $moodErr = "Mood ist erforderlich";
+  } else if ($_POST["selectedMood"] == "amazing") {
+    $mood = "amazing";
+  } else if ($_POST["selectedMood"] == "happy") {
+    $mood = "happy";
+  } else if ($_POST["selectedMood"] == "neutral") {
+    $mood = "neutral";
+  } else if ($_POST["selectedMood"] == "sad") {
+    $mood = "sad";
+  } else if ($_POST["selectedMood"] == "angry") {
+    $mood = "angry";
+  }
+
 }
 
 function test_input($data) {
@@ -42,7 +57,18 @@ function test_input($data) {
   return $data;
 }
 
-$sql = "INSERT INTO Entries VALUES ('$name', '$date', '$entry')";
+echo "<h2>Your Input</h2>";
+echo $name;
+echo "<br>";
+echo $date;
+echo "<br>";
+echo $mood;
+echo "<br>";
+echo $moodErr;
+echo "<br>";
+echo $entry;
+
+$sql = "INSERT INTO Entries VALUES ('$name', '$date', '$mood', '$entry')";
 if (mysqli_query($conn, $sql)) {
      echo "New record created successfully";
 } else {
@@ -50,11 +76,4 @@ if (mysqli_query($conn, $sql)) {
 }
 
 mysqli_close($conn);
-
-/*echo "<h2>Your Input</h2>";
-echo $name;
-echo "<br>";
-echo $date;
-echo "<br>";
-echo $entry; */
 ?>

@@ -28,13 +28,15 @@
             </div>
             <div class="formrow">
               <div class="mood">
-                <label for="mood">Mood:</label> <br>
+                <label for="mood">Mood:</label>
+                <span class="error">* <?php echo $moodErr;?></span> <br>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="amazing">&#128513;</button>
-                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="happy">&#128578;</button>
-                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="neutral">&#128528;</button>
-                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="sad">&#128577;</button>
-                  <button type="button" class="btn btn-outline-primary mood-btn" data-mood="angry">&#128545;</button>
+                  <input type="hidden" id="selectedMood" name="selectedMood" value="">
+                  <button type="button" class="btn btn-outline-primary mood-btn" name="amazing" value="amazing" onclick="setMood('amazing')">&#128513;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" name="happy" value="happy" onclick="setMood('happy')">&#128578;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" name="neutral" value="neutral" onclick="setMood('neutral')">&#128528;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" name="sad" value="sad" onclick="setMood('sad')">&#128577;</button>
+                  <button type="button" class="btn btn-outline-primary mood-btn" name="angry" value="angry" onclick="setMood('angry')">&#128545;</button>
                 </div>
               </div>
 
@@ -52,15 +54,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <?php
-    echo "<h2>Your Input</h2>"";
-    echo $name;
-    echo "<br>";
-    echo $date;
-    echo "<br>";
-    echo $entry;
-    ?> -->
 
     <div class="journal">
       <ul class="entrylist">
@@ -85,6 +78,13 @@
         </li>
       </ul>
     </div>
+
+    <script>
+      // JavaScript function to set the selected mood in the hidden input field
+      function setMood(mood) {
+        document.getElementById('selectedMood').value = mood;
+      }
+    </script>
 
   </body>
 </html>
