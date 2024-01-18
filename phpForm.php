@@ -12,6 +12,15 @@ if (!$conn) {
 }
 echo "Connected successfully";
 
+/* $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
+$result = $conn->query($fetch);
+
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    echo 
+  }
+} */
+
 $nameErr = $dateErr = $moodErr = $entryErr = "";
 $name = $date = $mood = $entry = "";
 
@@ -48,11 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mood = "angry";
   }
 
-  if (empty($nameErr) && empty($dateErr) && empty($entryErr) && empty($moodErr)) {
-    // Use prepared statement to insert data into the database
-    $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $name, $date, $mood, $entry);
-  }
+  // Use prepared statement to insert data into the database
+  $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $name, $date, $mood, $entry);
 
   // Execute the statement
   if ($stmt->execute()) {
@@ -72,6 +79,8 @@ function test_input($data) {
   return $data;
 }
 
+mysqli_close($conn);
+
 echo "<h2>Your Input</h2>";
 echo $name;
 echo "<br>";
@@ -83,6 +92,4 @@ echo $moodErr;
 echo "<br>";
 echo $entry;
 
-
-mysqli_close($conn);
 ?>
