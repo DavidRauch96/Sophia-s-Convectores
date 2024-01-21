@@ -105,11 +105,11 @@
     $count = 0;
     while ($enr = mysqli_fetch_assoc($result)) {
       $count++;
-      $a = array($count, $enr["Person_Name"], $enr["Date"], $enr["Mood"], $enr["Entry_Text"]);
+      $a = array('Count' => $count, 'Person_Name' => $enr["Person_Name"], 'Date' => $enr["Date"], 'Mood' => $enr["Mood"], 'Entry_Text' => $enr["Entry_Text"]);
       array_push($data, $a);
     }
 
-    echo json_encode(array_values($data));
+    /* echo json_encode(array_values($data)); */
     ?>
 
     <script>
