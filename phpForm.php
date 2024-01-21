@@ -1,35 +1,87 @@
 <?php
-  // The global $_POST variable allows you to access the data sent with the POST method by name
-  // To access the data sent with the GET method, you can use $_GET
-  $date = htmlspecialchars($_POST['date']);
-  $name  = htmlspecialchars($_POST['name']);
-  $entry  = htmlspecialchars($_POST['entry']);
 
-  echo  $date <br>;
-  echo  $name <br>;
-  echo  $entry;
-
-/*<?php
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Retrieve form data
-  $date = $_POST["date"];
-  $name = $_POST["name"];
-  $entry = $_POST["entry"];
-
-  // Validate data (you may want to add more validation)
-  if (empty($date) || empty($name) || empty($entry)) {
-      echo "Please fill out all fields.";
-  } else {
-      // Display the new entry
-      echo '<li class="entryitem center">';
-      echo '<div>';
-      echo "<p># $name am $date</p>";
-      echo "<p>$entry</p>";
-      echo '</div>';
-      echo '</li>';
-  }
+include_once("/config/config.php");
+// Create a connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+// Check the connection
+if (!$conn) {
+     die("Connection failed: " . mysqli_connect_error());
 }
-?>*/
+echo "Connected successfully";
+
+/* 
+ *  What happens when you click "Submit"
+ */
+
+$nameErr = $dateErr = $moodErr = $entryErr = "";
+$name = $date = $mood = $entry = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (empty($_POST["name"])) {
+    $nameErr = "Name ist erforderlich";
+  } else {
+    $name = test_input($_POST["name"]);
+  }
+
+  if (empty($_POST["date"])) {
+    $dateErr = "Datum ist erforderlich";
+  } else {
+    $date = test_input($_POST["date"]);
+  }
+
+  if (empty($_POST["entry"])) {
+    $entryErr = "Eintrag ist erforderlich";
+  } else {
+    $entry = test_input($_POST["entry"]);
+  }
+
+  if (empty($_POST["selectedMood"])) {
+    $moodErr = "Mood ist erforderlich";
+  } else if ($_POST["selectedMood"] == "amazing") {
+    $mood = "amazing";
+  } else if ($_POST["selectedMood"] == "happy") {
+    $mood = "happy";
+  } else if ($_POST["selectedMood"] == "neutral") {
+    $mood = "neutral";
+  } else if ($_POST["selectedMood"] == "sad") {
+    $mood = "sad";
+  } else if ($_POST["selectedMood"] == "angry") {
+    $mood = "angry";
+  }
+
+  // Use prepared statement to insert data into the database
+  $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $name, $date, $mood, $entry);
+
+  // Execute the statement
+  if ($stmt->execute()) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $stmt->error;
+  }
+
+  // Close the statement
+  $stmt->close();
+}
+
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+mysqli_close($conn);
+
+echo "<h2>Your Input</h2>";
+echo $name;
+echo "<br>";
+echo $date;
+echo "<br>";
+echo $mood;
+echo "<br>";
+echo $moodErr;
+echo "<br>";
+echo $entry;
 
 ?>
