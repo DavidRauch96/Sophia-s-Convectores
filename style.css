@@ -40,6 +40,7 @@ textarea{
     box-sizing: border-box;
     border: 1px solid #0d6efd;
     border-radius: 4px;
+    margin-bottom: 10px;
     background-color: #f8f8f8;
     resize: none;
 }
@@ -58,6 +59,10 @@ input {
     background-color: #f8f8f8;
     width: 95%;
     min-height: 2em;
+}
+
+.submit {
+    width: 100%;
 }
 
 .entrylist {
