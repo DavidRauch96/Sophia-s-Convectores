@@ -60,6 +60,7 @@
         <li id="1" class="entryitem center">
           <div>
             <p>#Name am #Datum</p>
+            <p>&#128513;</p>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, 
             sed diam nonumy eirmod tempor invidunt ut labore et dolore 
             magna aliquyam erat, sed diam voluptua. At vero eos et 
@@ -81,7 +82,7 @@
 
 
     <?php
-    include_once("config.php");
+    include_once("config/config.php");
     // Create a connection
     $conn = mysqli_connect($servername, $username, $password, $database);
     // Check the connection
@@ -114,9 +115,12 @@
       console.log();
 
       function createHtmlEntry(entry) {
+        var parsedMood = parseMood(entry.Mood);
+
         return '<li id=' + entry.Person_Name + ' class="entryitem center">' + 
                   '<div>' + 
                     '<p>' + entry.Person_Name + ' am ' + entry.Date + '</p>' + 
+                    '<p>' + parsedMood + 
                     '<p>' + entry.Entry_Text + '</p>' + 
                   '</div>' + 
                 '</li>';
@@ -128,13 +132,25 @@
         var entryHTML = createHtmlEntry(entry);
         entryList.innerHTML += entryHTML;
       });
-    </script>
-
-    <script>
 
       // JavaScript function to set the selected mood in the hidden input field
       function setMood(mood) {
         document.getElementById('selectedMood').value = mood;
+      }
+
+      function parseMood(mood) {
+        switch(mood) {
+          case 'amazing':
+            return '&#128513;';
+          case 'happy':
+            return '&#128578;';
+          case 'neutral':
+            return '&#128528;';
+          case 'sad':
+            return '&#128577;';
+          case 'angry':
+            return '&#128545;';
+        }
       }
     </script>
 

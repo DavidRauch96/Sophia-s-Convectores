@@ -9,47 +9,6 @@ if (!$conn) {
 }
 echo "Connected successfully";
 
-/*
- *  Fill EntryList with data from database
- */
-
-/* $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
-$result = mysqli_query($conn, $fetch);
-
-
-$data = array();
-$count = 0;
-while ($enr = mysqli_fetch_assoc($result)) {
-  $count++;
-  $a = array($count, $enr["Person_Name"], $enr["Date"], $enr["Mood"], $enr["Entry_Text"]);
-  array_push($data, $a);
-}
-
-echo json_encode($data);
-
-
-
-<script>
-  var data = <?php echo json_encode($data); ?>;
-  console.log("data = " data);
-
-  function createHtmlEntry(entry) {
-    return '<li id=' + entry.Person_Name + 'class="entryitem center">' + 
-              '<div>' + 
-                '<p>' + entry.Person_Name + ' am ' + entry.Date + '</p>' + 
-                '<p>' + entry.Entry_Text + '</p>' + 
-              '</div>' + 
-            '</li>';
-    console.log("entry = "entry);
-  }
-
-  var entryList = document.querySelector('.entrylist');
-  data.forEach(function(entry) {
-    var entryHTML = createHtmlEntry(entry);
-    entryList.innerHTML += entryHTML;
-  });
-</script> */
-
 /* 
  *  What happens when you click "Submit"
  */
