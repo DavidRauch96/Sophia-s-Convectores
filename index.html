@@ -5,14 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css">
   <title>Dressler's Convectores</title>
 </head>
 
 <body>
+  <header><h1 class="title">WÜD-2118's persönliches Gästebuch</h1></header>
 
   <div class="formcontainer">
-    <h1>Dein Eintrag</h1>
+    <!-- <h1>Dein Eintrag</h1> -->
     <form method="post" action="phpForm.php">
       <div class="formrow">
         <div class="date">
@@ -56,7 +58,7 @@
         <span class="error">*
           <?php echo isset($entryErr) ? $entryErr : '';?>
         </span>
-        <textarea name="entry" id="entry" rows="10"></textarea><br>
+        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast..."></textarea><br>
       </div>
       <div>
         <!--<button type="button" class="btn btn-outline-primary">Submit</button>-->
@@ -88,7 +90,6 @@
       </li>
     </ul>
   </div>
-
 
   <?php
     include_once("config/config.php");

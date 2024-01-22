@@ -1,14 +1,12 @@
 body {
     /*background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);*/
-    
+    font-family: 'Space Mono', monospace;
+    background: rgba(175, 238, 238, 0.3);
 }
 
-h1 {
+.title {
     text-align: center;
-    margin-bottom: 1em;
-    /* background: -webkit-linear-gradient(right, #56d8e4, #9f01ea, #56d8e4, #9f01ea);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
+    margin: 1em;
 }
 
 .formcontainer {
