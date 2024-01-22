@@ -4,19 +4,44 @@ body {
     color: lightcoral;
 }
 
-.title {
+.title, .lower-section {
     text-align: center;
     margin: 1em;
 }
 
+.lower-section {
+    margin-bottom: 2em;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+label {
+    font-size: 1rem;
+    margin: 0.25rem;
+}
+
+hr {
+    margin: auto;
+    width: 60%;
+    color: grey;
+}
+
 .formcontainer {
+    background-color: rgb(247, 246, 246);
     margin: auto;
     width: 500px;
-    border: 1px solid lightcoral;
+    border: 2px solid darkgray;
     margin-top: 30px;
     margin-bottom: 100px;
-    box-shadow: 0 5px 25px rgba(0,0,0,.6);
-    padding: 30px
+    /* box-shadow: 0 5px 25px rgba(0,0,0,.6); */
+    box-shadow: 15px 15px 1px lightcoral, 15px 15px 0px 1px black;
+    padding: 30px;
 }
 
 .formrow{
@@ -27,12 +52,13 @@ body {
 textarea{
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #0d6efd;
+    border: none;
+    border-color: darkgray;
     border-radius: 4px;
     margin-bottom: 10px;
-    background-color: #f8f8f8;
     resize: none;
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+    background-color: lightgoldenrodyellow;
 }
 
 .date, 
@@ -46,27 +72,34 @@ textarea{
     text-align: center;
 }
 
-.error {
-    
-}
-
 input {
     border: none;
-    border-bottom: 1px solid #0d6efd;
     background-color: #f8f8f8;
     width: 95%;
     min-height: 2em;
     box-shadow: 4px 4px 10px rgba(0,0,0,0.06);
+    background-color: lightgoldenrodyellow;
 }
 
 .submit {
     width: auto;
     padding: 0.5em 1.5em;
+    color: lightcoral;
 }
 
 .btn-group {
     background-color: white;
     border-radius: 5px;
+}
+
+.btn-outline-primary {
+    border-color: lightcoral;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: lightcoral;
+    border-color: lightcoral; /*set the color you want here*/
 }
 
 .entrylist {
@@ -85,8 +118,9 @@ input {
 .entryitem {
     margin-bottom: 1.5em;
     width: 80%;
-    padding: 10px 10px 20px 10px;
+    padding: 2em 1.5em 2em 1.5em;
     border: 1px solid #BFBFBF;
     background-color: white;
-    box-shadow: 10px 10px 5px #aaaaaa;
+    /* box-shadow: 10px 10px 5px #aaaaaa; */
+    box-shadow: 15px 15px 0px lightcoral, 15px 15px 0px 1px black;
 }
