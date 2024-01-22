@@ -120,26 +120,39 @@ input {
     box-shadow: 15px 15px 0px lightcoral, 15px 15px 0px 1px black;
 }
 
-/* .left {
+/* .wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.left {
     background-color: lightcoral;
     padding: 20px;
     float: left;
-    width: 20%;
+    width: 15%;
+    height: 100vh;
 }
 
 .main {
+    flex: 1;
     float: left;
-    width: 60%;
+    width: 70%;
 }
 
 .right {
     background-color: lightcoral;
     padding: 20px;
     float: left;
-    width: 20%;
+    width: 15%;
+    height: 100vh;
 } */
 
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
+
+    .wrapper {
+        flex-direction: column;
+    }
+
     .left {
         width: 0%;
     }
@@ -151,4 +164,4 @@ input {
     .right {
         width: 0%;
     }
-}
+} */
