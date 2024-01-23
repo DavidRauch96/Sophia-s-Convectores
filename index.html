@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="style-v3.css">
+  <link rel="stylesheet" href="style.css">
   <title>Dressler's Convectores</title>
 </head>
 
@@ -39,21 +39,21 @@
         </div>
         <div class="formrow">
           <div class="mood">
-            <label for="mood">Mood:</label>
+            <label for="mood">Wie war deine Fahrt?</label>
             <span class="error">
               <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
             </span> <br>
             <div class="btn-group">
               <input type="hidden" id="selectedMood" name="selectedMood" value="">
-              <button type="button" class="btn btn-outline-primary mood-btn" name="amazing" value="amazing"
+              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
                 onclick="setMood('amazing')">&#128513;</button>
-              <button type="button" class="btn btn-outline-primary mood-btn" name="happy" value="happy"
+              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="happy" value="happy"
                 onclick="setMood('happy')">&#128578;</button>
-              <button type="button" class="btn btn-outline-primary mood-btn" name="neutral" value="neutral"
+              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="neutral" value="neutral"
                 onclick="setMood('neutral')">&#128528;</button>
-              <button type="button" class="btn btn-outline-primary mood-btn" name="sad" value="sad"
+              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="sad" value="sad"
                 onclick="setMood('sad')">&#128577;</button>
-              <button type="button" class="btn btn-outline-primary mood-btn" name="angry" value="angry"
+              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="angry" value="angry"
                 onclick="setMood('angry')">&#128545;</button>
             </div>
           </div>
@@ -66,8 +66,7 @@
           <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
         </div>
         <div>
-          <!--<button type="button" class="btn btn-outline-primary">Submit</button>-->
-          <input class="btn btn-outline-primary submit" type="submit" name="submitForm">
+          <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
         </div>
       </form>
     </div>
@@ -80,16 +79,8 @@
       <ul class="entrylist">
         <li id="1" class="entryitem center">
           <div>
-            <p>&#128513;  #Name am #Datum</p>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-              sed diam nonumy eirmod tempor invidunt ut labore et dolore
-              magna aliquyam erat, sed diam voluptua. At vero eos et
-              accusam et</p>
-          </div>
-        </li>
-        <li id="2" class="entryitem center">
-          <div>
-            <p>&#128513;  #Name am #Datum</p>
+            <p class="emoji">&#128513;&nbsp;</p>
+            <p class="id-line">#Name am #Datum</p>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
               sed diam nonumy eirmod tempor invidunt ut labore et dolore
               magna aliquyam erat, sed diam voluptua. At vero eos et
@@ -135,32 +126,37 @@
     ?>
 
   <script>
-    var data = <?php echo json_encode($data); ?>;
-    console.log();
 
+    // Encode inputdata($data) from database in 'phpForm.php' to JSON
+    var data = <?php echo json_encode($data); ?>;
+
+    // Create html elements for an entry in the entry list
     function createHtmlEntry(entry) {
       var parsedMood = parseMood(entry.Mood);
+      var parsedDate = parseDate(entry.Date);
 
       return '<li id=' + entry.Person_Name + ' class="entryitem center">' +
         '<div>' +
-        '<p>' + parsedMood + '  ' + entry.Person_Name + ' am ' + entry.Date + '</p>' +
+        '<p class="emoji">' + parsedMood + '&nbsp;' + '</p>' + 
+        '<p class="id-line"><b>' + entry.Person_Name + '</b> am <b>' + parsedDate + '</b></p>' +
         '<p>' + entry.Entry_Text + '</p>' +
         '</div>' +
         '</li>';
-      console.log("entry = " + entry);
     }
 
+    // Create an entry for every row in the database
     var entryList = document.querySelector('.entrylist');
     data.forEach(function (entry) {
       var entryHTML = createHtmlEntry(entry);
       entryList.innerHTML += entryHTML;
     });
 
-    // JavaScript function to set the selected mood in the hidden input field
+    // Set the selected mood in the hidden input field of the mood button group (.btn-group)
     function setMood(mood) {
       document.getElementById('selectedMood').value = mood;
     }
 
+    // Parse the value of column "mood" of database to utf-8 emoji
     function parseMood(mood) {
       switch (mood) {
         case 'amazing':
@@ -175,6 +171,13 @@
           return '&#128545;';
       }
     }
+
+    // Change the date format from YYYY-MM-DD to DD.MM.YYYY
+    function parseDate(date) {
+      var parts = date.split('-');
+      return parts[2] + '.' + parts[1] + '.' + parts[0];
+    }
+
   </script>
 
 </body>

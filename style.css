@@ -39,7 +39,6 @@ hr {
     border: 2px solid darkgray;
     margin-top: 30px;
     margin-bottom: 100px;
-    /* box-shadow: 0 5px 25px rgba(0,0,0,.6); */
     box-shadow: 15px 15px 1px lightcoral, 15px 15px 0px 1px black;
     padding: 30px;
 }
@@ -86,19 +85,21 @@ input {
     color: lightcoral;
 }
 
-.btn-group {
-    background-color: white;
-    border-radius: 5px;
-}
+
 
 .btn-outline-primary {
     border-color: lightcoral;
+    border-radius: 0px;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
     background-color: lightcoral;
-    border-color: lightcoral; /*set the color you want here*/
+    border-color: lightcoral;
+}
+
+.btn-outline-primary:focus {
+    background-color: lightcoral;
 }
 
 .entrylist {
@@ -111,44 +112,71 @@ input {
 }
 
 .entryitem {
-    margin-bottom: 1.5em;
+    display: flex;
+    margin-bottom: 3em;
     width: 80%;
     padding: 2em 1.5em 2em 1.5em;
     border: 1px solid #BFBFBF;
     background-color: white;
-    /* box-shadow: 10px 10px 5px #aaaaaa; */
     box-shadow: 15px 15px 0px lightcoral, 15px 15px 0px 1px black;
 }
 
-/* .left {
+.emoji {
+    float: left;
+}
+
+.id-line {
+    overflow: hidden;
+    max-width: max-content;
+    background-color: lightgoldenrodyellow;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* .wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.left {
     background-color: lightcoral;
     padding: 20px;
     float: left;
-    width: 20%;
+    width: 15%;
+    height: 100vh;
 }
 
 .main {
+    flex: 1;
     float: left;
-    width: 60%;
+    width: 70%;
 }
 
 .right {
     background-color: lightcoral;
     padding: 20px;
     float: left;
-    width: 20%;
+    width: 15%;
+    height: 100vh;
 } */
 
-@media screen and (max-width: 800px) {
-    .left {
-        width: 0%;
+@media screen and (max-width: 600px) {
+
+    .formcontainer {
+        width: auto;
+        margin-left: 20px;
+        margin-right: 20px;
     }
-     
-    .main {
-        width: 100%;
+
+    h1 {
+        font-size: 2rem;
     }
-    
-    .right {
-        width: 0%;
+
+    h2 {
+        font-size: 1.5rem;
     }
-}
+
+    hr {
+        width: 80%;
+    }
+} 
