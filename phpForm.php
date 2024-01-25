@@ -40,26 +40,33 @@ $nameErr = $dateErr = $moodErr = $entryErr = "";
 $name = $date = $mood = $entry = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  $isValid = true;
+
   if (empty($_POST["name"])) {
-    $nameErr = "Name ist erforderlich";
+    $nameErr = "Name ist erforderlich!";
+    $isValid = false;
   } else {
     $name = test_input($_POST["name"]);
   }
 
   if (empty($_POST["date"])) {
-    $dateErr = "Datum ist erforderlich";
+    $dateErr = "Datum ist erforderlich!";
+    $isValid = false;
   } else {
     $date = test_input($_POST["date"]);
   }
 
   if (empty($_POST["entry"])) {
-    $entryErr = "Eintrag ist erforderlich";
+    $entryErr = "Eintrag ist erforderlich!";
+    $isValid = false;
   } else {
     $entry = test_input($_POST["entry"]);
   }
 
   if (empty($_POST["selectedMood"])) {
-    $moodErr = "Mood ist erforderlich";
+    $moodErr = "Mood ist erforderlich!";
+    $isValid = false;
   } else if ($_POST["selectedMood"] == "amazing") {
     $mood = "amazing";
   } else if ($_POST["selectedMood"] == "happy") {
@@ -72,33 +79,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mood = "angry";
   }
 
-  // Use prepared statement to insert data into the database
-  $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $name, $date, $mood, $entry);
+  if($isValid) {
+    // Use prepared statement to insert data into the database
+    $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $date, $mood, $entry);
 
-  // Execute the statement
-  if ($stmt->execute()) {
-    echo '<div class="formcontainer">
-      <div class="circle">
-        <i class="bi bi-check-circle-fill success"></i>
-        <p>Dein Eintrag wurde hinzugefügt!</p><br>
-        <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
-      </div>
-    </div>';
+    // Execute the statement
+    if ($stmt->execute()) {
+      echo '<div class="formcontainer">
+        <div class="icon">
+          <i class="bi bi-check-circle-fill success"></i>
+          <p>Dein Eintrag wurde hinzugefügt!</p><br>
+          <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
+        </div>
+      </div>';
+    } else {
+      echo '<div class="formcontainer">
+        <div class="icon">
+          <i class="bi bi-check-circle-fill failed"></i>
+          <p>';
+      echo "Error: " . $stmt->error;
+      echo '</p><br>
+          <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
+        </div>
+      </div>';
+    }
+
+    // Close the statement
+    $stmt->close();
   } else {
     echo '<div class="formcontainer">
-      <div class="circle">
-        <i class="bi bi-check-circle-fill failed"></i>
-        <p>';
-    echo "Error: " . $stmt->error;
+        <div class="flexbox icon">
+          <div class="rotate135"><i class="bi bi-puzzle-fill success"></i></div>
+          <div class="rotate45"><i class="bi bi-puzzle-fill success"></i></div>
+          <div class="rotate25"><i class="bi bi-puzzle failed"></i></div>
+        </div>
+        <div class="error-messages">
+          <p>';
+    echo isset($nameErr) ? $nameErr : ''; 
+    echo '</p>
+                  <p>';
+    echo isset($dateErr) ? $dateErr : ''; 
+    echo '</p>
+                  <p>';
+    echo isset($moodErr) ? $moodErr : ''; 
+    echo '</p>
+                  <p>';
+    echo isset($entryErr) ? $entryErr : ''; 
     echo '</p><br>
-        <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
-      </div>
-    </div>';
+          <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück <- </button>
+        </div>
+      </div>';
   }
-
-  // Close the statement
-  $stmt->close();
 }
 
 function test_input($data) {
