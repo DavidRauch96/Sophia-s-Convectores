@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
@@ -12,82 +13,82 @@
 </head>
 
 <body>
-    <header>
-      <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
-    </header>
-  
-    <div class="formcontainer">
-      <form method="post" action="phpForm.php">
-        <div class="formrow">
-          <div class="date">
-            <label for="date">Datum:</label>
-            <span class="error">
-              <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
-            </span>
-            <input type="date" id="date" name="date">
-          </div>
-          <div class="name">
-            <label for="name">Name:</label>
-            <span class="error">
-              <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
-            </span>
-            <input type="text" id="name" name="name" placeholder="Dein Name ">
-          </div>
-        </div>
-        <div class="formrow">
-          <div class="mood">
-            <label for="mood">Wie war deine Fahrt?</label>
-            <span class="error">
-              <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
-            </span> <br>
-            <div class="btn-group">
-              <input type="hidden" id="selectedMood" name="selectedMood" value="">
-              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
-                onclick="setMood('amazing')">&#128513;</button>
-              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="happy" value="happy"
-                onclick="setMood('happy')">&#128578;</button>
-              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="neutral" value="neutral"
-                onclick="setMood('neutral')">&#128528;</button>
-              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="sad" value="sad"
-                onclick="setMood('sad')">&#128577;</button>
-              <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="angry" value="angry"
-                onclick="setMood('angry')">&#128545;</button>
-            </div>
-          </div>
-        </div>
-        <div class="underline">
-          <label for="entry">Dein Eintrag:</label>
+  <header>
+    <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
+  </header>
+
+  <div class="formcontainer">
+    <form method="post" action="phpForm.php">
+      <div class="formrow">
+        <div class="date">
+          <label for="date">Datum:</label>
           <span class="error">
-            <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
+            <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
           </span>
-          <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
+          <input type="date" id="date" name="date">
         </div>
-        <div>
-          <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
+        <div class="name">
+          <label for="name">Name:</label>
+          <span class="error">
+            <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
+          </span>
+          <input type="text" id="name" name="name" placeholder="Dein Name ">
         </div>
-      </form>
-    </div>
-  
-    <hr class="solid"><br>
-  
-    <h2 class="lower-section">Gästebucheinträge</h2>
-  
-    <div class="journal">
-      <ul class="entrylist">
-        <li id="1" class="entryitem center">
-          <div>
-            <p class="emoji">&#128513;&nbsp;</p>
-            <p class="id-line">#Name am #Datum</p>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-              sed diam nonumy eirmod tempor invidunt ut labore et dolore
-              magna aliquyam erat, sed diam voluptua. At vero eos et
-              accusam et</p>
+      </div>
+      <div class="formrow">
+        <div class="mood">
+          <label for="mood">Wie war deine Fahrt?</label>
+          <span class="error">
+            <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
+          </span> <br>
+          <div class="btn-group">
+            <input type="hidden" id="selectedMood" name="selectedMood" value="">
+            <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
+              onclick="setMood('amazing')">&#128513;</button>
+            <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="happy" value="happy"
+              onclick="setMood('happy')">&#128578;</button>
+            <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="neutral" value="neutral"
+              onclick="setMood('neutral')">&#128528;</button>
+            <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="sad" value="sad"
+              onclick="setMood('sad')">&#128577;</button>
+            <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="angry" value="angry"
+              onclick="setMood('angry')">&#128545;</button>
           </div>
-        </li>
-      </ul>
-    </div>
-  
-  
+        </div>
+      </div>
+      <div class="underline">
+        <label for="entry">Dein Eintrag:</label>
+        <span class="error">
+          <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
+        </span>
+        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
+      </div>
+      <div>
+        <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
+      </div>
+    </form>
+  </div>
+
+  <hr class="solid"><br>
+
+  <h2 class="lower-section">Gästebucheinträge</h2>
+
+  <div class="journal">
+    <ul class="entrylist">
+      <li id="1" class="entryitem center">
+        <div>
+          <p class="emoji">&#128513;&nbsp;</p>
+          <p class="id-line">#Name am #Datum</p>
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore
+            magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
 
   <?php
     include_once("config/config.php");
@@ -120,7 +121,7 @@
 
   <script>
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
-    var data = <?php echo json_encode($data); ?>;
+    var data = <? php echo json_encode($data); ?>;
 
     // Create html elements for an entry in the entry list
     function createHtmlEntry(entry) {
@@ -129,7 +130,7 @@
 
       return '<li id=' + entry.Person_Name + ' class="entryitem center">' +
         '<div>' +
-        '<p class="emoji">' + parsedMood + '&nbsp;' + '</p>' + 
+        '<p class="emoji">' + parsedMood + '&nbsp;' + '</p>' +
         '<p class="id-line"><b>' + entry.Person_Name + '</b> am <b>' + parsedDate + '</b></p>' +
         '<p>' + entry.Entry_Text + '</p>' +
         '</div>' +
