@@ -150,9 +150,23 @@
       entryList.innerHTML += entryHTML;
     });
 
-    // Set the selected mood in the hidden input field of the mood button group (.btn-group)
+    /* 
+     * Set the selected mood in the hidden input field of the mood button group (.btn-group)
+     * [1st part may be obsolete because of hte following:]
+     * Adds ".active" to class list of clicked button element and removes it from the other button elements (hidden input field might be obsolete)
+     */
     function setMood(mood) {
       document.getElementById('selectedMood').value = mood;
+
+      var buttons = document.querySelectorAll('.mood-btn');
+      buttons.forEach(function (button) {
+        button.classList.remove('active');
+      });
+
+      var clickedButton = document.querySelector('.mood-btn[value="' + mood + '"]');
+      if (clickedButton) {
+        clickedButton.classList.add('active');
+      }
     }
 
     // Parse the value of column "mood" of database to utf-8 emoji
@@ -175,20 +189,6 @@
     function parseDate(date) {
       var parts = date.split('-');
       return parts[2] + '.' + parts[1] + '.' + parts[0];
-    }
-
-    function styleMood(mood) {
-      document.getElementById('selectedMood').value = mood;
-
-      var buttons = document.querySelectorAll('.mood-btn');
-      buttons.forEach(function (button) {
-        button.classList.remove('active');
-      });
-
-      var clickedButton = document.querySelector('.mood-btn[value="' + mood + '"]');
-      if (clickedButton) {
-        clickedButton.classList.add('active');
-      }
     }
   </script>
 

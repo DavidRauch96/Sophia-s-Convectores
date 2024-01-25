@@ -104,19 +104,11 @@ input {
     border-color: lightcoral;
 }
 
-.btn-outline-primary:focus {
-    background-color: lightcoral;
-}
-
 .mood-btn:not(:disabled):not(.disabled):active {
     background-color: red;
 }
 
-.mood-btn:focus-visible {
-    background-color: lightcoral;
-}
-
-.active {
+.mood-btn:not(:disabled):not(.disabled).active {
     background-color: lightcoral;
 }
 
