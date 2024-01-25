@@ -43,8 +43,13 @@ hr {
     padding: 30px;
 }
 
-.circle {
+.icon {
     text-align: center;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: center;
 }
 
 .success {
@@ -55,6 +60,22 @@ hr {
 .failed {
     font-size: 4em;
     color: red;
+}
+
+.rotate45 {
+    transform: rotate(45deg);
+}
+
+.rotate135 {
+    transform: rotate(135deg);
+}
+
+.rotate25 {
+    transform: rotate(25deg);
+}
+
+.error-messages {
+    text-align: center;
 }
 
 .formrow{
