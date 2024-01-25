@@ -18,21 +18,21 @@
   </header>
 
   <div class="formcontainer">
-    <form method="post" action="phpForm.php">
+    <form method="post" action="phpForm.php" onsubmit="return validateForm();">
       <div class="formrow">
         <div class="date">
           <label for="date">Datum:</label>
           <span class="error">
             <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
           </span>
-          <input type="date" id="date" name="date">
+          <input type="date" id="date" name="date" required>
         </div>
         <div class="name">
           <label for="name">Name:</label>
           <span class="error">
             <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
           </span>
-          <input type="text" id="name" name="name" placeholder="Dein Name ">
+          <input type="text" id="name" name="name" placeholder="Dein Name" required>
         </div>
       </div>
       <div class="formrow">
@@ -42,7 +42,7 @@
             <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
           </span> <br>
           <div class="btn-group">
-            <input type="hidden" id="selectedMood" name="selectedMood" value="">
+            <input type="hidden" id="selectedMood" name="selectedMood" value="" required>
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
               onclick="setMood('amazing')">&#128513;</button>
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="happy" value="happy"
@@ -61,7 +61,7 @@
         <span class="error">
           <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
         </span>
-        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
+        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️" required></textarea><br>
       </div>
       <div>
         <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
@@ -120,8 +120,13 @@
   ?>
 
   <script>
+
+    function validateForm() {
+      
+    }
+
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
-    var data = <? php echo json_encode($data); ?>;
+    var data = <?php echo json_encode($data); ?>;
 
     // Create html elements for an entry in the entry list
     function createHtmlEntry(entry) {
@@ -184,6 +189,8 @@
       var parts = date.split('-');
       return parts[2] + '.' + parts[1] + '.' + parts[0];
     }
+
+    
   </script>
 
 </body>
