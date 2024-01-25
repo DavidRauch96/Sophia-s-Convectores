@@ -22,14 +22,14 @@
       <div class="formrow">
         <div class="date">
           <label for="date">Datum:</label>
-          <span class="error">
+          <span class="error dateerror">
             <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
           </span>
           <input type="date" id="date" name="date" required>
         </div>
         <div class="name">
           <label for="name">Name:</label>
-          <span class="error">
+          <span class="error nameerror">
             <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
           </span>
           <input type="text" id="name" name="name" placeholder="Dein Name" required>
@@ -38,9 +38,7 @@
       <div class="formrow">
         <div class="mood">
           <label for="mood">Wie war deine Fahrt?</label>
-          <span class="error">
-            <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
-          </span> <br>
+          
           <div class="btn-group">
             <input type="hidden" id="selectedMood" name="selectedMood" value="" required>
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
@@ -54,17 +52,21 @@
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="angry" value="angry"
               onclick="setMood('angry')">&#128545;</button>
           </div>
+          <br>
+          <span class="error mooderror" aria-hidden="true">
+            <?php echo isset($moodErr) ? $moodErr : '';?>
+          </span>
         </div>
       </div>
       <div class="underline">
         <label for="entry">Dein Eintrag:</label>
-        <span class="error">
+        <span class="error entryerror">
           <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
         </span>
         <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️" required></textarea><br>
       </div>
       <div>
-        <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
+        <input class="btn btn-outline-primary shadow-none submit" id="submitbutton" type="submit" name="submitForm">
       </div>
     </form>
   </div>
@@ -121,9 +123,28 @@
 
   <script>
 
-    function validateForm() {
-      
+  
+    var submit = document.getElementById("submitbutton");
+    submit.addEventListener("click", validate);
+
+    function validate(e) {
+      console.log('called');
+      e.preventDefault();
+
+      var mood = document.getElementById("selectedMood");
+      var dateerror = document.querySelector(".dateerror")
+      var nameerror = document.querySelector(".nameerror")
+      var mooderror = document.querySelector(".mooderror")
+      var entryerror = document.querySelector(".entryerror")
+      var valid = true;
+
+      if (mood.value === '') {
+        mooderror.setAttribute("aria-hidden", false);
+        mooderror.textContent = "* Bitte ausfüllen"
+      }
+      return valid
     }
+    
 
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
     var data = <?php echo json_encode($data); ?>;
