@@ -12,9 +12,6 @@
 </head>
 
 <body>
-  <!-- <div class="wrapper">
-    <div class="left"></div>
-  <div class="main"> -->
     <header>
       <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
     </header>
@@ -89,10 +86,6 @@
         </li>
       </ul>
     </div>
-  <!-- </div>
-
-  <div class="right"></div>
-  </div> -->
   
   
 
