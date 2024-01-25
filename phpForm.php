@@ -1,13 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Feedback</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
+  </header>
+</body>
+
+</html>
+
 <?php
 
-include_once("/config/config.php");
+include_once("config/config.php");
 // Create a connection
 $conn = mysqli_connect($servername, $username, $password, $database);
 // Check the connection
 if (!$conn) {
      die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
+/* echo "Connected successfully"; */
 
 /* 
  *  What happens when you click "Submit"
@@ -55,9 +78,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // Execute the statement
   if ($stmt->execute()) {
-    echo "New record created successfully";
+    echo '<div class="formcontainer">
+      <div class="circle">
+        <i class="bi bi-check-circle-fill success"></i>
+        <p>Dein Eintrag wurde hinzugefügt!</p><br>
+        <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
+      </div>
+    </div>';
   } else {
+    echo '<div class="formcontainer">
+      <div class="circle">
+        <i class="bi bi-check-circle-fill failed"></i>
+        <p>';
     echo "Error: " . $stmt->error;
+    echo '</p><br>
+        <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück zum Gästebuch <- </button>
+      </div>
+    </div>';
   }
 
   // Close the statement
@@ -73,7 +110,7 @@ function test_input($data) {
 
 mysqli_close($conn);
 
-echo "<h2>Your Input</h2>";
+/* echo "<h2>Your Input</h2>";
 echo $name;
 echo "<br>";
 echo $date;
@@ -82,6 +119,6 @@ echo $mood;
 echo "<br>";
 echo $moodErr;
 echo "<br>";
-echo $entry;
+echo $entry; */
 
 ?>
