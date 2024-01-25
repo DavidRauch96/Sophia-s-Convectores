@@ -43,6 +43,20 @@ hr {
     padding: 30px;
 }
 
+.circle {
+    text-align: center;
+}
+
+.success {
+    font-size: 4em;
+    color: lightgreen;
+}
+
+.failed {
+    font-size: 4em;
+    color: red;
+}
+
 .formrow{
     display: flex;
     margin-bottom: 20px;
@@ -79,15 +93,7 @@ input {
     background-color: lightgoldenrodyellow;
 }
 
-.submit {
-    width: auto;
-    padding: 0.5em 1.5em;
-    color: lightcoral;
-}
-
-
-
-.btn-outline-primary {
+.btn-outline-primary, .btn-primary {
     border-color: lightcoral;
     border-radius: 0px;
 }
@@ -98,7 +104,25 @@ input {
     border-color: lightcoral;
 }
 
-.btn-outline-primary:focus {
+.mood-btn:not(:disabled):not(.disabled):active {
+    background-color: red;
+}
+
+.mood-btn:not(:disabled):not(.disabled).active {
+    background-color: lightcoral;
+}
+
+.submit, .backbutton {
+    width: auto;
+    padding: 0.5em 1.5em;
+}
+
+.submit {
+    color: lightcoral;
+}
+
+.backbutton {
+    border-color: lightgreen;
     background-color: lightcoral;
 }
 

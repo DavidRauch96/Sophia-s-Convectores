@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
@@ -123,10 +123,9 @@
     }
 
     /* echo json_encode(array_values($data)); */
-    ?>
+  ?>
 
   <script>
-
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
     var data = <?php echo json_encode($data); ?>;
 
@@ -151,9 +150,23 @@
       entryList.innerHTML += entryHTML;
     });
 
-    // Set the selected mood in the hidden input field of the mood button group (.btn-group)
+    /* 
+     * Set the selected mood in the hidden input field of the mood button group (.btn-group)
+     * [1st part may be obsolete because of hte following:]
+     * Adds ".active" to class list of clicked button element and removes it from the other button elements (hidden input field might be obsolete)
+     */
     function setMood(mood) {
       document.getElementById('selectedMood').value = mood;
+
+      var buttons = document.querySelectorAll('.mood-btn');
+      buttons.forEach(function (button) {
+        button.classList.remove('active');
+      });
+
+      var clickedButton = document.querySelector('.mood-btn[value="' + mood + '"]');
+      if (clickedButton) {
+        clickedButton.classList.add('active');
+      }
     }
 
     // Parse the value of column "mood" of database to utf-8 emoji
@@ -177,7 +190,6 @@
       var parts = date.split('-');
       return parts[2] + '.' + parts[1] + '.' + parts[0];
     }
-
   </script>
 
 </body>
