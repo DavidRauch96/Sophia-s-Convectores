@@ -32,12 +32,12 @@ if (!$conn) {
 }
 /* echo "Connected successfully"; */
 
+$nameErr = $dateErr = $moodErr = $entryErr = "";
+$name = $date = $mood = $entry = "";
+
 /* 
  *  What happens when you click "Submit"
  */
-
-$nameErr = $dateErr = $moodErr = $entryErr = "";
-$name = $date = $mood = $entry = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -79,7 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mood = "angry";
   }
 
+  // serves as server-side input "validation" - Only saves input if it exists to combat null values in database
   if($isValid) {
+    
     // Use prepared statement to insert data into the database
     $stmt = $conn->prepare("INSERT INTO Entries (Person_Name, Date, Mood, Entry_Text) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $name, $date, $mood, $entry);
@@ -127,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <p>';
     echo isset($entryErr) ? $entryErr : ''; 
     echo '</p><br>
-          <button class="btn btn-primary backbutton" onclick="window.location.href=\'//www.sophiasconvectores.de\';"> -> Zurück <- </button>
+          <button class="btn btn-primary backbutton" onclick="history.back()"> -> Zurück <- </button>
         </div>
       </div>';
   }
@@ -141,16 +143,5 @@ function test_input($data) {
 }
 
 mysqli_close($conn);
-
-/* echo "<h2>Your Input</h2>";
-echo $name;
-echo "<br>";
-echo $date;
-echo "<br>";
-echo $mood;
-echo "<br>";
-echo $moodErr;
-echo "<br>";
-echo $entry; */
 
 ?>

@@ -22,25 +22,23 @@
       <div class="formrow">
         <div class="date">
           <label for="date">Datum:</label>
-          <span class="error">
-            <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
-          </span>
           <input type="date" id="date" name="date">
+          <span class="error dateerror">
+            <?php echo isset($dateErr) ? $dateErr : '';?>
+          </span>
         </div>
         <div class="name">
           <label for="name">Name:</label>
-          <span class="error">
-            <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
+          <input type="text" id="name" name="name" placeholder="Dein Name">
+          <span class="error nameerror">
+            <?php echo isset($nameErr) ? $nameErr : '';?>
           </span>
-          <input type="text" id="name" name="name" placeholder="Dein Name ">
         </div>
       </div>
       <div class="formrow">
         <div class="mood">
           <label for="mood">Wie war deine Fahrt?</label>
-          <span class="error">
-            <?php echo /* '* ' */ isset($moodErr) ? $moodErr : '';?>
-          </span> <br>
+          
           <div class="btn-group">
             <input type="hidden" id="selectedMood" name="selectedMood" value="">
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
@@ -54,17 +52,21 @@
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="angry" value="angry"
               onclick="setMood('angry')">&#128545;</button>
           </div>
+          <br>
+          <span class="error mooderror" aria-hidden="true">
+            <?php echo isset($moodErr) ? $moodErr : '';?>
+          </span>
         </div>
       </div>
       <div class="underline">
         <label for="entry">Dein Eintrag:</label>
-        <span class="error">
-          <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
-        </span>
         <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
+        <span class="error entryerror" aria-hidden="true">
+          <?php echo isset($entryErr) ? $entryErr : '';?>
+        </span>
       </div>
       <div>
-        <input class="btn btn-outline-primary shadow-none submit" type="submit" name="submitForm">
+        <input class="btn btn-outline-primary shadow-none submit" id="submitbutton" type="submit" name="submitForm">
       </div>
     </form>
   </div>
@@ -88,25 +90,23 @@
     </ul>
   </div>
 
-
-
   <?php
+
     include_once("config/config.php");
+
     // Create a connection
     $conn = mysqli_connect($servername, $username, $password, $database);
+
     // Check the connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    echo "Connected successfully";
+    echo "✓";
 
-    /*
-    *  Fill EntryList with data from database
-    */
-
+    
+    // Fill data array with entries from database
     $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
     $result = mysqli_query($conn, $fetch);
-
 
     $data = array();
     $count = 0;
@@ -115,13 +115,71 @@
       $a = array('Count' => $count, 'Person_Name' => $enr["Person_Name"], 'Date' => $enr["Date"], 'Mood' => $enr["Mood"], 'Entry_Text' => $enr["Entry_Text"]);
       array_push($data, $a);
     }
-
-    /* echo json_encode(array_values($data)); */
   ?>
 
   <script>
+
+    var submit = document.getElementById("submitbutton");
+    submit.addEventListener("click", validate);
+
+    function validate(e) {
+
+      // Select input fields
+      var date = document.getElementById("date");
+      var name = document.getElementById("name");
+      var mood = document.getElementById("selectedMood");
+      var entry = document.getElementById("entry");
+
+      // Select error fields
+      var dateError = document.querySelector(".dateerror");
+      var nameError = document.querySelector(".nameerror");
+      var moodError = document.querySelector(".mooderror");
+      var entryError = document.querySelector(".entryerror");
+
+      var valid = true;
+
+      // Reset previous error messages
+      dateError.textContent = '';
+      nameError.textContent = '';
+      moodError.textContent = '';
+      entryError.textContent = '';
+
+      //Check input fields for content
+      if (date.value === '') {
+        dateError.setAttribute("aria-hidden", false);
+        dateError.textContent = "↑ Datum ist erforderlich!";
+        valid = false;
+      }
+
+      if (name.value === '') {
+        nameError.setAttribute("aria-hidden", false);
+        nameError.textContent = "↑ Name ist erforderlich!";
+        valid = false;
+      }
+
+      if (mood.value === '') {
+        moodError.setAttribute("aria-hidden", false);
+        moodError.textContent = "↑ Bitte auswählen!";
+        valid = false;
+      }
+
+      if (entry.value === '') {
+        entryError.setAttribute("aria-hidden", false);
+        entryError.textContent = "↑ Schreibe einen Eintrag!";
+        valid = false;
+      }
+
+      // Prevent submission when a field is invalid
+      if(valid == false) {
+        e.preventDefault();
+      }
+
+      return valid;
+    }
+    
+
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
-    var data = <? php echo json_encode($data); ?>;
+    var data = <?php echo json_encode($data); ?>;
 
     // Create html elements for an entry in the entry list
     function createHtmlEntry(entry) {
@@ -184,6 +242,7 @@
       var parts = date.split('-');
       return parts[2] + '.' + parts[1] + '.' + parts[0];
     }
+
   </script>
 
 </body>
