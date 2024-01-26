@@ -32,12 +32,12 @@ if (!$conn) {
 }
 /* echo "Connected successfully"; */
 
+$nameErr = $dateErr = $moodErr = $entryErr = "";
+$name = $date = $mood = $entry = "";
+
 /* 
  *  What happens when you click "Submit"
  */
-
-$nameErr = $dateErr = $moodErr = $entryErr = "";
-$name = $date = $mood = $entry = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -143,16 +143,5 @@ function test_input($data) {
 }
 
 mysqli_close($conn);
-
-/* echo "<h2>Your Input</h2>";
-echo $name;
-echo "<br>";
-echo $date;
-echo "<br>";
-echo $mood;
-echo "<br>";
-echo $moodErr;
-echo "<br>";
-echo $entry; */
 
 ?>

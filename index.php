@@ -18,21 +18,21 @@
   </header>
 
   <div class="formcontainer">
-    <form method="post" action="phpForm.php" onsubmit="return validateForm();">
+    <form method="post" action="phpForm.php">
       <div class="formrow">
         <div class="date">
           <label for="date">Datum:</label>
+          <input type="date" id="date" name="date">
           <span class="error dateerror">
-            <?php echo /* '* ' */ isset($dateErr) ? $dateErr : '';?>
+            <?php echo isset($dateErr) ? $dateErr : '';?>
           </span>
-          <input type="date" id="date" name="date" required>
         </div>
         <div class="name">
           <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Dein Name">
           <span class="error nameerror">
-            <?php echo /* '* ' */ isset($nameErr) ? $nameErr : '';?>
+            <?php echo isset($nameErr) ? $nameErr : '';?>
           </span>
-          <input type="text" id="name" name="name" placeholder="Dein Name" required>
         </div>
       </div>
       <div class="formrow">
@@ -40,7 +40,7 @@
           <label for="mood">Wie war deine Fahrt?</label>
           
           <div class="btn-group">
-            <input type="hidden" id="selectedMood" name="selectedMood" value="" required>
+            <input type="hidden" id="selectedMood" name="selectedMood" value="">
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="amazing" value="amazing"
               onclick="setMood('amazing')">&#128513;</button>
             <button type="button" class="btn btn-outline-primary shadow-none mood-btn" name="happy" value="happy"
@@ -60,10 +60,10 @@
       </div>
       <div class="underline">
         <label for="entry">Dein Eintrag:</label>
-        <span class="error entryerror">
-          <?php echo /* '* ' */ isset($entryErr) ? $entryErr : '';?>
+        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️"></textarea><br>
+        <span class="error entryerror" aria-hidden="true">
+          <?php echo isset($entryErr) ? $entryErr : '';?>
         </span>
-        <textarea name="entry" id="entry" rows="10" placeholder="Schreib was du im Kopf hast... ✏️" required></textarea><br>
       </div>
       <div>
         <input class="btn btn-outline-primary shadow-none submit" id="submitbutton" type="submit" name="submitForm">
@@ -90,25 +90,23 @@
     </ul>
   </div>
 
-
-
   <?php
+
     include_once("config/config.php");
+
     // Create a connection
     $conn = mysqli_connect($servername, $username, $password, $database);
+
     // Check the connection
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    echo "Connected successfully";
+    echo "✓";
 
-    /*
-    *  Fill EntryList with data from database
-    */
-
+    
+    // Fill data array with entries from database
     $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
     $result = mysqli_query($conn, $fetch);
-
 
     $data = array();
     $count = 0;
@@ -117,32 +115,66 @@
       $a = array('Count' => $count, 'Person_Name' => $enr["Person_Name"], 'Date' => $enr["Date"], 'Mood' => $enr["Mood"], 'Entry_Text' => $enr["Entry_Text"]);
       array_push($data, $a);
     }
-
-    /* echo json_encode(array_values($data)); */
   ?>
 
   <script>
 
-  
     var submit = document.getElementById("submitbutton");
     submit.addEventListener("click", validate);
 
     function validate(e) {
-      console.log('called');
-      e.preventDefault();
 
+      // Select input fields
+      var date = document.getElementById("date");
+      var name = document.getElementById("name");
       var mood = document.getElementById("selectedMood");
-      var dateerror = document.querySelector(".dateerror")
-      var nameerror = document.querySelector(".nameerror")
-      var mooderror = document.querySelector(".mooderror")
-      var entryerror = document.querySelector(".entryerror")
+      var entry = document.getElementById("entry");
+
+      // Select error fields
+      var dateError = document.querySelector(".dateerror");
+      var nameError = document.querySelector(".nameerror");
+      var moodError = document.querySelector(".mooderror");
+      var entryError = document.querySelector(".entryerror");
+
       var valid = true;
 
-      if (mood.value === '') {
-        mooderror.setAttribute("aria-hidden", false);
-        mooderror.textContent = "* Bitte ausfüllen"
+      // Reset previous error messages
+      dateError.textContent = '';
+      nameError.textContent = '';
+      moodError.textContent = '';
+      entryError.textContent = '';
+
+      //Check input fields for content
+      if (date.value === '') {
+        dateError.setAttribute("aria-hidden", false);
+        dateError.textContent = "↑ Datum ist erforderlich!";
+        valid = false;
       }
-      return valid
+
+      if (name.value === '') {
+        nameError.setAttribute("aria-hidden", false);
+        nameError.textContent = "↑ Name ist erforderlich!";
+        valid = false;
+      }
+
+      if (mood.value === '') {
+        moodError.setAttribute("aria-hidden", false);
+        moodError.textContent = "↑ Bitte auswählen!";
+        valid = false;
+      }
+
+      if (entry.value === '') {
+        entryError.setAttribute("aria-hidden", false);
+        entryError.textContent = "↑ Schreibe einen Eintrag!";
+        valid = false;
+      }
+
+      // Prevent submission when a field is invalid
+      if(valid == false) {
+        e.preventDefault();
+      }
+
+      return valid;
     }
     
 
@@ -211,7 +243,6 @@
       return parts[2] + '.' + parts[1] + '.' + parts[0];
     }
 
-    
   </script>
 
 </body>

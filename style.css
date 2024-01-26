@@ -74,8 +74,9 @@ hr {
     transform: rotate(25deg);
 }
 
-.error-messages {
-    text-align: center;
+.error {
+    font-size: 0.75rem;
+    color: red;
 }
 
 .formrow{
@@ -89,7 +90,6 @@ textarea{
     border: none;
     border-color: darkgray;
     border-radius: 4px;
-    margin-bottom: 10px;
     resize: none;
     box-shadow:4px 4px 10px rgba(0,0,0,0.06);
     background-color: lightgoldenrodyellow;
@@ -140,6 +140,7 @@ input {
 
 .submit {
     color: lightcoral;
+    margin-top: 10px;
 }
 
 .backbutton {
