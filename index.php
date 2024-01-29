@@ -113,9 +113,12 @@
     }
   ?>
 
+  <script src="script.js"></script>
   <script>
 
-    var submit = document.getElementById("submitbutton");
+
+
+    /* var submit = document.getElementById("submitbutton");
     submit.addEventListener("click", validate);
 
     function validate(e) {
@@ -171,7 +174,7 @@
       }
 
       return valid;
-    }
+    } */
 
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
     var data = <?php echo json_encode($data); ?>;
@@ -203,7 +206,7 @@
      * [1st part may be obsolete because of hte following:]
      * Adds ".active" to class list of clicked button element and removes it from the other button elements (hidden input field might be obsolete)
      */
-    function setMood(mood) {
+    /* function setMood(mood) {
       document.getElementById('selectedMood').value = mood;
 
       var buttons = document.querySelectorAll('.mood-btn');
@@ -237,7 +240,7 @@
     function parseDate(date) {
       var parts = date.split('-');
       return parts[2] + '.' + parts[1] + '.' + parts[0];
-    }
+    } */
 
   </script>
 
