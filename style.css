@@ -180,7 +180,19 @@ input {
 }
 
 footer {
-    float: right;
+    border-top: solid 5px #BFBFBF;
+    background-color: lightcoral;
+    margin-bottom: 0;
+}
+
+.footertext {
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+}
+
+.status {
+    font-size: 0.7em;
 }
 
 @media screen and (max-width: 600px) {
