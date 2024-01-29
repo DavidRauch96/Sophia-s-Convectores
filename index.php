@@ -77,16 +77,7 @@
 
   <div class="journal">
     <ul class="entrylist">
-      <li id="1" class="entryitem center">
-        <div>
-          <p class="emoji">&#128513;&nbsp;</p>
-          <p class="id-line">#Name am #Datum</p>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et</p>
-        </div>
-      </li>
+      
     </ul>
   </div>
 
