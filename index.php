@@ -83,16 +83,21 @@
 
   <?php
 
+    /* header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    header("Pragma: no-cache"); // HTTP 1.0.
+    header("Expires: 0"); // Proxies. */
+
     include_once("config/config.php");
 
     // Create a connection
     $conn = mysqli_connect($servername, $username, $password, $database);
-
+    $status = "";
     // Check the connection
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+      die("Connection failed: " . mysqli_connect_error());
+    } else {
+      $status = "✓ Connected";
     }
-    echo "✓";
 
     
     // Fill data array with entries from database
@@ -167,10 +172,10 @@
 
       return valid;
     }
-    
 
     // Encode inputdata($data) from database in 'phpForm.php' to JSON
     var data = <?php echo json_encode($data); ?>;
+    reverse_data = data.reverse();
 
     // Create html elements for an entry in the entry list
     function createHtmlEntry(entry) {
@@ -188,7 +193,7 @@
 
     // Create an entry for every row in the database
     var entryList = document.querySelector('.entrylist');
-    data.forEach(function (entry) {
+    reverse_data.forEach(function (entry) {
       var entryHTML = createHtmlEntry(entry);
       entryList.innerHTML += entryHTML;
     });
@@ -237,7 +242,9 @@
   </script>
 
   <footer>
-    <p>Version: v1.0.0</p>
+    <p class="footertext">ⓒ - David Rauch</p>
+    <p class="footertext status"> <?php echo $status ?> </p>
+    <p class="footertext status">Version: v1.0.1</p>
   </footer>
 
 </body>
