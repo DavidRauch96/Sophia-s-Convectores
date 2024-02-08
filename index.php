@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
   <header>
     <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
   </header>
@@ -86,6 +87,10 @@
     /* header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
     header("Pragma: no-cache"); // HTTP 1.0.
     header("Expires: 0"); // Proxies. */
+
+    include 'auth.php';
+
+    $authenticatedUser = authenticateUser();
 
     include_once("config/config.php");
 
