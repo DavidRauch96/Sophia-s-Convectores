@@ -47,11 +47,9 @@ function validate(e) {
         valid = false;
     }
 
-    console.log(valid);
-
     if (valid) {
         var password = prompt("Gib' das Passwort unter dem QR-Code ein:");
-        if (password_verify(password, $hashed_sub_password)) {
+        if (password !== "17122022") {
             alert("Incorrect password!");
             e.preventDefault();
             return false;
@@ -59,6 +57,8 @@ function validate(e) {
     } else {
         e.preventDefault(); // Prevent form submission if any field is invalid
     }
+
+    return valid;
 }
 
 /* 
