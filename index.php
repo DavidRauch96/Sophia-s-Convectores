@@ -104,6 +104,10 @@
       $status = "✓ Connected";
     }
 
+    /* function authenticatePassword($password) {
+      $envPassword = getenv('PASSWORD');
+      return $password === $envPassword;
+    } */
     
     // Fill data array with entries from database
     $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
