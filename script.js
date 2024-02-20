@@ -51,7 +51,7 @@ function validate(e) {
 
     if (valid) {
         var password = prompt("Gib' das Passwort unter dem QR-Code ein:");
-        if (password !== "17122022") {
+        if (password_verify(password, $hashed_sub_password)) {
             alert("Incorrect password!");
             e.preventDefault();
             return false;
