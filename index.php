@@ -155,7 +155,7 @@
   <footer>
     <p class="footertext">ⓒ - David Rauch</p>
     <p class="footertext status"> <?php echo $status ?> </p>
-    <p class="footertext status">Version: v1.0.1</p>
+    <p class="footertext status">Version: v1.0.2</p>
   </footer>
 
 </body>
