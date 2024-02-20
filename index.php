@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
   <header>
     <h1 class="title">WÜD-2118's persönliches Gästebuch</h1>
   </header>
@@ -87,6 +88,10 @@
     header("Pragma: no-cache"); // HTTP 1.0.
     header("Expires: 0"); // Proxies. */
 
+    /* include 'auth.php';
+
+    $authenticatedUser = authenticateUser(); */
+
     include_once("config/config.php");
 
     // Create a connection
@@ -99,6 +104,10 @@
       $status = "✓ Connected";
     }
 
+    /* function authenticatePassword($password) {
+      $envPassword = getenv('PASSWORD');
+      return $password === $envPassword;
+    } */
     
     // Fill data array with entries from database
     $fetch = "SELECT Person_Name, Date, Mood, Entry_Text FROM Entries";
@@ -146,7 +155,7 @@
   <footer>
     <p class="footertext">ⓒ - David Rauch</p>
     <p class="footertext status"> <?php echo $status ?> </p>
-    <p class="footertext status">Version: v1.0.1</p>
+    <p class="footertext status">Version: v1.0.2</p>
   </footer>
 
 </body>

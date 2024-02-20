@@ -47,12 +47,18 @@ function validate(e) {
         valid = false;
     }
 
-    // Prevent submission when a field is invalid
-    if (valid == false) {
-        e.preventDefault();
-    }
+    console.log(valid);
 
-    return valid;
+    if (valid) {
+        var password = prompt("Gib' das Passwort unter dem QR-Code ein:");
+        if (password_verify(password, $hashed_sub_password)) {
+            alert("Incorrect password!");
+            e.preventDefault();
+            return false;
+        }
+    } else {
+        e.preventDefault(); // Prevent form submission if any field is invalid
+    }
 }
 
 /* 
