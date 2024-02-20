@@ -88,9 +88,9 @@
     header("Pragma: no-cache"); // HTTP 1.0.
     header("Expires: 0"); // Proxies. */
 
-    include 'auth.php';
+    /* include 'auth.php';
 
-    $authenticatedUser = authenticateUser();
+    $authenticatedUser = authenticateUser(); */
 
     include_once("config/config.php");
 
